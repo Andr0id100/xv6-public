@@ -27,6 +27,7 @@ OBJS = \
 	uart.o\
 	vectors.o\
 	vm.o\
+	schedulers.o\
 
 # Cross-compiling (e.g., on Mac OS X)
 # TOOLPREFIX = i386-jos-elf
@@ -89,6 +90,22 @@ endif
 ifneq ($(shell $(CC) -dumpspecs 2>/dev/null | grep -e '[^f]nopie'),)
 CFLAGS += -fno-pie -nopie
 endif
+
+SCHED_CHOICE = -D SCHEDULER=RR
+ifeq ($(SCHEDULER), RR)
+SCHED_CHOICE = -D SCHEDULER=RR
+endif
+
+ifeq ($(SCHEDULER), FCFS)
+SCHED_CHOICE = -D SCHEDULER=FCFS
+endif
+
+ifeq ($(SCHEDULER), PBS)
+SCHED_CHOICE = -D SCHEDULER=PBS
+endif
+
+CFLAGS += $(SCHED_CHOICE)
+
 
 xv6.img: bootblock kernel
 	dd if=/dev/zero of=xv6.img count=10000
@@ -181,6 +198,13 @@ UPROGS=\
 	_usertests\
 	_wc\
 	_zombie\
+	_test\
+	_ps\
+	_benchmark\
+	_samp\
+	_time\
+	_fcfs_load\
+	_setPriority\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
@@ -250,9 +274,9 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
-	printf.c umalloc.c\
+	printf.c umalloc.c test.c ps.c benchmark.c samp.c time.c fcfs_load.c\
 	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
-	.gdbinit.tmpl gdbutil\
+	.gdbinit.tmpl gdbutil setPriority\
 
 dist:
 	rm -rf dist

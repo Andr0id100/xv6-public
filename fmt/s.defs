@@ -1,0 +1,26 @@
+acquire 1574
+acquiresleep 4872
+allocproc 2505
+allocuvm 1927
+alltraps 3504
+ALT 7960
+argfd 6321
+argint 3802
+argptr 3811
+argstr 3829
+__attribute__ 1305
+BACK 8811
+backcmd 8846 9064
+BACKSPACE 8350
+balloc 5266
+BBLOCK 4360
+B_DIRTY 4112
+begin_op 5078
+bfree 5302
+bget 4716
+binit 4688
+bmap 5660
+bootmain 9467
+BPB 4357
+bread 4752
+brelse 4776

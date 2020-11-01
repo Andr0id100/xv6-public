@@ -1,0 +1,50 @@
+8700 #include "syscall.h"
+8701 #include "traps.h"
+8702 
+8703 #define SYSCALL(name) \
+8704   .globl name; \
+8705   name: \
+8706     movl $SYS_ ## name, %eax; \
+8707     int $T_SYSCALL; \
+8708     ret
+8709 
+8710 SYSCALL(fork)
+8711 SYSCALL(exit)
+8712 SYSCALL(wait)
+8713 SYSCALL(pipe)
+8714 SYSCALL(read)
+8715 SYSCALL(write)
+8716 SYSCALL(close)
+8717 SYSCALL(kill)
+8718 SYSCALL(exec)
+8719 SYSCALL(open)
+8720 SYSCALL(mknod)
+8721 SYSCALL(unlink)
+8722 SYSCALL(fstat)
+8723 SYSCALL(link)
+8724 SYSCALL(mkdir)
+8725 SYSCALL(chdir)
+8726 SYSCALL(dup)
+8727 SYSCALL(getpid)
+8728 SYSCALL(sbrk)
+8729 SYSCALL(sleep)
+8730 SYSCALL(uptime)
+8731 SYSCALL(ps)
+8732 SYSCALL(waitx)
+8733 
+8734 
+8735 
+8736 
+8737 
+8738 
+8739 
+8740 
+8741 
+8742 
+8743 
+8744 
+8745 
+8746 
+8747 
+8748 
+8749 
