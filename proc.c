@@ -436,7 +436,9 @@ scheduler(void)
 { 
 
   struct proc *p;
+  #if SCHEDULER != RR
   struct proc *p_run;
+  #endif
   struct cpu *c = mycpu();
   c->proc = 0;
 
